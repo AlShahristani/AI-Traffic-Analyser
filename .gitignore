@@ -24,6 +24,9 @@ data/processed/
 *.onnx
 weights/
 
+# Claude Code local settings
+.claude/settings.local.json
+
 # OS / editor
 .DS_Store
 Thumbs.db
