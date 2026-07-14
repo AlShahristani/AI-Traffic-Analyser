@@ -16,13 +16,18 @@ venv/
 *.avi
 *.mov
 *.mkv
-data/raw/
-data/processed/
+data/raw/*
+data/processed/*
+!data/raw/.gitkeep
+!data/processed/.gitkeep
 
 # Model weights - large binaries, keep local only
 *.pt
 *.onnx
 weights/
+
+# Ultralytics run outputs (predictions, training logs/checkpoints)
+runs/
 
 # Claude Code local settings
 .claude/settings.local.json
