@@ -1,5 +1,8 @@
+import csv
 from collections import Counter
+from pathlib import Path
 
+import matplotlib.pyplot as plt
 from ultralytics import YOLO
 
 from define_zones import ZONES
@@ -104,3 +107,25 @@ if multi_hop:
     print(f"Tracks visiting 3+ distinct zones ({len(multi_hop)}):")
     for i in multi_hop:
         print(f"  {' -> '.join(i['path'])} ({i['class']}, {i['frames_seen']} frames)")
+
+reports_dir = Path("reports")
+reports_dir.mkdir(exist_ok=True)
+
+with open(reports_dir / "route_counts.csv", "w", newline="") as f:
+    writer = csv.writer(f)
+    writer.writerow(["start_zone", "end_zone", "vehicle_class", "count"])
+    for (start, end, cls), count in routes.most_common():
+        writer.writerow([start, end, cls, count])
+
+labels = [f"{start}\n->{end}\n({cls})" for (start, end, cls), _ in routes.most_common()]
+counts = [count for _, count in routes.most_common()]
+
+plt.figure(figsize=(10, 6))
+plt.bar(labels, counts, color="steelblue")
+plt.ylabel("Vehicle count")
+plt.title("Vehicle routes through intersection (90s test clip)")
+plt.tight_layout()
+plt.savefig(reports_dir / "route_counts.png")
+
+print()
+print(f"Wrote {reports_dir / 'route_counts.csv'} and {reports_dir / 'route_counts.png'}")
