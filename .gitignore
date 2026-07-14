@@ -1,0 +1,34 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+
+# Virtual environment
+roundabout-env/
+.venv/
+venv/
+
+# Environment variables / secrets
+.env
+
+# Footage - large binaries, keep local only
+*.mp4
+*.avi
+*.mov
+*.mkv
+data/raw/
+data/processed/
+
+# Model weights - large binaries, keep local only
+*.pt
+*.onnx
+weights/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Jupyter
+.ipynb_checkpoints/
