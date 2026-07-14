@@ -38,10 +38,18 @@ for frame_result in results:
             continue
         class_name = model.names[int(cls)]
         if track_id not in track_zones:
-            track_zones[track_id] = {"first": zone, "last": zone, "class": class_name, "frames_seen": 1}
+            track_zones[track_id] = {
+                "first": zone,
+                "last": zone,
+                "class": class_name,
+                "frames_seen": 1,
+                "path": [zone],
+            }
         else:
             track_zones[track_id]["last"] = zone
             track_zones[track_id]["frames_seen"] += 1
+            if zone != track_zones[track_id]["path"][-1]:
+                track_zones[track_id]["path"].append(zone)
 
 MIN_FRAMES = 4
 before_filter = len(track_zones)
@@ -83,3 +91,16 @@ for i in single_zone:
     dwell_buckets[bucket] += 1
 for bucket in ["1 frame", "2-3 frames", "4-10 frames", "11+ frames"]:
     print(f"  {bucket}: {dwell_buckets[bucket]}")
+
+print()
+print("Path length (distinct zone segments visited) across all kept tracks:")
+path_lengths = Counter(len(i["path"]) for i in track_zones.values())
+for length, count in sorted(path_lengths.items()):
+    print(f"  {length} zone(s): {count}")
+
+multi_hop = [i for i in track_zones.values() if len(i["path"]) >= 3]
+if multi_hop:
+    print()
+    print(f"Tracks visiting 3+ distinct zones ({len(multi_hop)}):")
+    for i in multi_hop:
+        print(f"  {' -> '.join(i['path'])} ({i['class']}, {i['frames_seen']} frames)")
