@@ -1,0 +1,37 @@
+{
+  "video": "data/raw/traffic_cam_footage.mp4",
+  "frame_width": 3840,
+  "frame_height": 2160,
+  "zones": {
+    "north entry": [
+      55,
+      505,
+      1127,
+      856
+    ],
+    "west entry": [
+      30,
+      883,
+      252,
+      1467
+    ],
+    "south exit": [
+      414,
+      1605,
+      2976,
+      2145
+    ],
+    "north exit": [
+      1945,
+      225,
+      2814,
+      721
+    ],
+    "south entry": [
+      3253,
+      645,
+      3802,
+      1599
+    ]
+  }
+}

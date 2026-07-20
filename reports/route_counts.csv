@@ -1,8 +1,10 @@
 start_zone,end_zone,vehicle_class,count
-north_lanes,south_road,car,22
-east_road,north_queue,car,18
-south_road,east_road,car,7
-east_road,south_road,car,4
-east_road,south_road,bicycle,1
-north_lanes,south_road,bus,1
-south_road,east_road,motorcycle,1
+south entry,north exit,car,25
+north entry,south exit,car,22
+west entry,north exit,car,6
+west entry,south entry,car,5
+south entry,south exit,car,3
+south entry,north entry,car,1
+west entry,south entry,bicycle,1
+west entry,north exit,bus,1
+north entry,south exit,person,1
